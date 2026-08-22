@@ -3080,3 +3080,11 @@ window.addEventListener('pagehide', persistQueue);
 document.addEventListener('visibilitychange', () => { if (document.hidden) persistQueue(); });
 restoreQueue();
 route();
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then(() => console.log("CintaMusic Service Worker aktif"))
+      .catch(err => console.error("Service Worker gagal:", err));
+  });
+}
